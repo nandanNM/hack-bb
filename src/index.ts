@@ -44,6 +44,7 @@ app.use(
       if (!origin) return callback(null, true);
       if (
         origin === "http://localhost:3000" ||
+        origin === "https://hack-bb.vercel.app" ||
         origin === "https://hach-2026-f.vercel.app" ||
         allowedOriginRegex.test(origin)
       ) {

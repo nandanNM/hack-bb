@@ -24,7 +24,7 @@ async function resolveSchoolFromRequest(request: Request | undefined): Promise<{
 
       const url = new URL(origin);
       const hostParts = url.hostname.split(".");
-      const subdomain = hostParts.length >= 2 ? hostParts[0] : null;
+      const subdomain = "demo";
 
       domain = subdomain || (request.headers.get("x-school-domain") as string) || null;
       if (!domain) return null;
@@ -67,10 +67,9 @@ const auth = betterAuth({
 
   advanced: {
     cookiePrefix: "hach2026",
-    useSecureCookies: process.env.NODE_ENV === "production",
+    useSecureCookies: true, // Required for SameSite=None
     crossSubDomainCookies: {
       enabled: true,
-      domain: "vercel.app",
     },
   },
 
@@ -151,7 +150,9 @@ const auth = betterAuth({
 
   trustedOrigins: [
     process.env.CLIENT_URL || "http://localhost:3000",
+    "https://hack-bb.vercel.app",
     "https://hach-2026-f.vercel.app",
+    "https://*.vercel.app",
     "https://*.hach-2026-f.vercel.app",
   ],
 
