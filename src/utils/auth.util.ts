@@ -24,7 +24,7 @@ async function resolveSchoolFromRequest(request: Request | undefined): Promise<{
 
       const url = new URL(origin);
       const hostParts = url.hostname.split(".");
-      const subdomain = "demo";
+      const subdomain = hostParts.length >= 2 ? hostParts[0] : null;
 
       domain = subdomain || (request.headers.get("x-school-domain") as string) || null;
       if (!domain) return null;
@@ -66,10 +66,11 @@ const auth = betterAuth({
   },
 
   advanced: {
-    cookiePrefix: "hach2026",
-    useSecureCookies: true, // Required for SameSite=None
+    cookiePrefix: "pghall1",
+    useSecureCookies: process.env.NODE_ENV === "production",
     crossSubDomainCookies: {
       enabled: true,
+      domain: "pghall1.in",
     },
   },
 
@@ -148,13 +149,7 @@ const auth = betterAuth({
     }),
   },
 
-  trustedOrigins: [
-    process.env.CLIENT_URL || "http://localhost:3000",
-    "https://hack-bb.vercel.app",
-    "https://hach-2026-f.vercel.app",
-    "https://*.vercel.app",
-    "https://*.hach-2026-f.vercel.app",
-  ],
+  trustedOrigins: [process.env.CLIENT_URL || "http://localhost:3000", "https://*.pghall1.in"],
 
   plugins: [
     openAPI(),

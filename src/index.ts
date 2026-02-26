@@ -35,19 +35,14 @@ const PORT = process.env.PORT || 5000;
 // Development Logging
 app.use(morgan("dev"));
 
-const allowedOriginRegex = /^https:\/\/([a-zA-Z0-9-]+)\.hach-2026-f\.vercel\.app$/;
+const allowedOriginRegex = /^https:\/\/([a-zA-Z0-9-]+)\.pghall1\.in$/;
 
 // CORS must be registered BEFORE all route handlers (including better-auth)
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (
-        origin === "http://localhost:3000" ||
-        origin === "https://hack-bb.vercel.app" ||
-        origin === "https://hach-2026-f.vercel.app" ||
-        allowedOriginRegex.test(origin)
-      ) {
+      if (origin === "http://localhost:3000" || allowedOriginRegex.test(origin)) {
         return callback(null, origin); // exact origin returned
       }
       return callback(new Error("Not allowed by CORS"));
