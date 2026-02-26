@@ -70,7 +70,7 @@ const auth = betterAuth({
     useSecureCookies: process.env.NODE_ENV === "production",
     crossSubDomainCookies: {
       enabled: true,
-      domain: "hach-2026-f.vercel.app",
+      domain: "vercel.app",
     },
   },
 
