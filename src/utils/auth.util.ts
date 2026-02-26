@@ -24,7 +24,7 @@ async function resolveSchoolFromRequest(request: Request | undefined): Promise<{
 
       const url = new URL(origin);
       const hostParts = url.hostname.split(".");
-      const subdomain = hostParts.length >= 2 ? hostParts[0] : null;
+      const subdomain = "demo";
 
       domain = subdomain || (request.headers.get("x-school-domain") as string) || null;
       if (!domain) return null;
